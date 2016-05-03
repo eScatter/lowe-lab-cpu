@@ -1,4 +1,5 @@
 #pragma once
+#include <memory>
 #include "../generic/base.hh"
 #include "../generic/triangle.hh"
 #include "../generic/intersect.hh"
@@ -31,7 +32,33 @@ namespace eScatter { namespace geometry
                 virtual bool intersect(Ray const &ray, real_t &time, real_t epsilon) const = 0;
         };
 
-        /*! BVH ObjectAdaptor, takes an object with the necessary functions
+        /*! \brief Add the Object interface to a pointer type. This leaves the
+         * choice to pass objects by reference to the BVH algorithm.
+         */
+        template <typename K, typename Ptr>
+        class ObjectPtr
+        {
+            Ptr p;
+
+            public:
+                using BoundingBox = typename K::BoundingBox;
+                using Vector = typename K::Vector;
+                using Point = typename K::Point;
+                using Ray = typename K::Ray;
+                using real_t = typename K::real_t;
+
+                ObjectPtr(Ptr p_):
+                    p(p_) {}
+
+                BoundingBox bounding_box() const
+                    { return p->bounding_box(); }
+                Point centroid() const
+                    { return p->centroid(); }
+                bool intersect(Ray const &ray, real_t &time, real_t epsilon) const
+                    { return p->intersect(*this, ray, time, epsilon); }
+        };
+
+        /*! \brief BVH ObjectAdaptor, takes an object with the necessary functions
          * already implemented and have them derive from the virtual functions
          * provided in the Object<K> base class. This allows us to mix template
          * classes with dynamic abstraction.

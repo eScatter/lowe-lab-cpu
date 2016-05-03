@@ -19,8 +19,8 @@ namespace eScatter { namespace geometry
                 Ray(Point const &origin, Vector const &direction):
                     origin(origin), direction(direction) {}
 
-                Ray(Point const &origin, Direction const &direction):
-                    origin(origin), direction(direction) {}
+/*                Ray(Point const &origin, Direction const &direction):
+                    origin(origin), direction(direction) {} */
 
                 Point operator()(real_t time) const
                     { return origin + time * direction; }

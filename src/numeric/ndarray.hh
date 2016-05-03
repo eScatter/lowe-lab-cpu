@@ -105,6 +105,13 @@ namespace eScatter { namespace numeric
             }
     };
 
+    /*! \brief Multi-dimensional numeric array.
+     *
+     * This allows us to use numeric data, stored in std::vector
+     * in a NumPy fashion. The raw data is accompanied with shape
+     * and stride information. The shape and stride allow us to change
+     * the way in which we iterate the data.
+     */
     template <typename T, unsigned D>
     class NdArray: public NdArrayBase<T, D>
     {

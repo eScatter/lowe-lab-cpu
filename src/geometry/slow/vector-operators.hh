@@ -86,6 +86,12 @@ namespace eScatter { namespace geometry
         }
 
         template <typename K>
+        Vector<K> operator-(Vector<K> const &a)
+        {
+            return Vector<K>(-a.x(), -a.y(), -a.z());
+        }
+
+        template <typename K>
         Vector<K> operator*(Vector<K> const &a, typename K::real_t s)
         {
             return Vector<K>(s * a.x(), s * a.y(), s * a.z());
@@ -101,6 +107,13 @@ namespace eScatter { namespace geometry
         Vector<K> operator/(Vector<K> const &a, typename K::real_t s)
         {
             return Vector<K>(a.x() / s, a.y() / s, a.z() / s);
+        }
+
+        /*! point-wise division */
+        template <typename K>
+        Vector<K> operator/(Vector<K> const &a, Vector<K> const &b)
+        {
+            return Vector<K>(a.x() / b.x(), a.y() / b.y(), a.z() / b.z());
         }
 
         /*! point-wise multiplication */

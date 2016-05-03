@@ -51,13 +51,13 @@ namespace System
     class Reversed
     {
         T const &p;
-    public:
-        using const_iterator = typename T::const_reverse_iterator;
-        using iterator = typename T::reverse_iterator;
-        
-        Reversed(T const &p_): p(p_) {}
-        const_iterator begin() const { return p.rbegin(); }
-        const_iterator end() const { return p.rend(); }  
+        public:
+            using const_iterator = typename T::const_reverse_iterator;
+            using iterator = typename T::reverse_iterator;
+            
+            Reversed(T const &p_): p(p_) {}
+            const_iterator begin() const { return p.rbegin(); }
+            const_iterator end() const { return p.rend(); }  
     };
     
     template <typename T>
@@ -124,5 +124,6 @@ namespace System
         for (auto i = std::begin(range); i != std::end(range); ++i)
             *out++ = std::experimental::apply(std::forward<Fn>(fn), *i);
     }
+
 }
 

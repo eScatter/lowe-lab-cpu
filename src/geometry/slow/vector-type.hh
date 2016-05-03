@@ -42,6 +42,12 @@ namespace eScatter { namespace geometry
                     return (*this) / norm();
                 }
 
+                Vector mirror(Vector const &other) const
+                {
+                    real_t dp = (*this)(other);
+                    return 2 * normalise() / dp - other;
+                }
+
                 /*! point-wise minimum of two vectors */
                 static Vector min(Vector const &a, Vector const &b)
                 {
